@@ -86,8 +86,9 @@ export default class InjectChangedFilesPlugin {
 
      const result = new ReplaceSource(original);
      const regex = /__webpackManifest__\s*=\s*\[\s*\]/g;
-     const changedFiles = JSON.stringify(this.hotFiles.concat(this.failedFiles));
-     const replacement = `__webpackManifest__ = ${changedFiles}`;
+     const changedFiles = this.hotFiles.concat(this.failedFiles);
+     const replacement =
+      `__webpackManifest__ = ${JSON.stringify(changedFiles).replace(/"/g, '\\\"')}`;
 
      let match;
      while ((match = regex.exec(originalSource)) !== null) { // eslint-disable-line no-cond-assign

@@ -60,7 +60,7 @@ function createWebpackConfig(webpackConfig, entryFilePath, outputFilePath, plugi
     const query = {
       include,
     };
-    config.entry = `${entryLoader}?${JSON.stringify(query)}!${config.entry}`;
+    config.entry = `${entryLoader}?${JSON.stringify(query).replace(/"/g, '\'')}!${config.entry}`;
   }
 
   config.context = entryPath;
